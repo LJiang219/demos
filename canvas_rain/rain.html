@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rain</title>
+  <style>
+    *{
+      margin: 0px;
+      padding:0px;
+    }
+    body {
+        overflow: hidden;
+      }
+    #canvas{
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    var cnv = document.getElementById("canvas");
+    var ctx = cnv.getContext("2d");
+    var w = (cnv.width = window.innerWidth);
+    var h = (cnv.height = window.innerHeight);
+    // console.log(w, h)
+    window.onresize = function() {
+      var w = (cavs.width = window.innerWidth);
+      var h = (cavs.height = window.innerHeight); //屏幕的宽高
+    };
+
+    //线的运动规律：每条雨丝做不同的加速运动 
+    //圆的运动规律：每个圆的半径匀速变大, [1, rMax]t是定值， r>rMax,则t的匀速减小到消失
+    //理解匀速加速运动：加速系数是 定值， 相当于 一次函数的k
+    //变速加速运动：加速系数是 变化的， (随机函数)
+
+    //初始化变量
+    var rainArr = []; //
+    var count = 3; //每个雨丝数据容器中的雨丝数量
+    var lineW = 2;  //直线的宽度
+    var lineH = 10; //直线的长度
+
+    function Rain(){
+
+    }
+    Rain.prototype = {
+      init: function(){
+        //线
+        this.x = random(1, w); //雨丝在x轴上出现的随机位置（水平轴）
+        this.y = 0;
+        // this.y = random(1, h);
+        this.ySpeed = random(4, 7); //雨丝下落的速度系数， 决定了雨丝下落的速度
+        // this.ySpeed =0.6;
+        //圆
+        this.r = 10; //圈的半径
+        this.rSpeed = 1; //圆半径匀速变大
+        this.t = 1; //圆的透明度初始值
+        this.ts = 0.9; //圆的透明度系数
+        this.maxR = 50;  //圆的最大半径值
+
+        //页面高度拐点值
+        this.l = random(0.8 * h, 0.9 * h);
+      },
+
+      draw: function(){
+        //画雨丝
+        if(this.y < this.l){
+          ctx.fillStyle = randomColor(this.t);
+          // ctx.fillStyle = "#f40"
+          // console.log(this.y)
+          ctx.fillRect(this.x, this.y, lineW, lineH );
+        }else{
+          //画圆
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+          ctx.strokeStyle = "rgba(0,255,255," + this.t + ")";
+          ctx.closePath();
+          ctx.stroke(); //开始绘制 默认黑
+        }
+
+        this.update();
+        
+      }, 
+
+      update:function(){
+        if(this.y <= this.l){
+          this.y += this.ySpeed;
+          // this.x += 10;
+          // this.y+=10;
+        }else{
+          if(this.t > 0.03){
+            this.r += this.rSpeed;
+            if(this.r > this.maxR){
+              this.t *= this.ts;
+            }
+          }else{
+            this.init();
+          }
+          
+         
+        }
+
+      }
+
+    }
+    
+
+    //逻辑主线
+    //1. 在同一张画布上重复生成雨丝数据
+    //2. 展示数据
+    function createData(){ 
+      for(var i=0; i< count; i++){
+        //同一个数组中的雨丝下落有递增间隔
+        (function(j){
+          setTimeout(function(){
+            var rain = new Rain(); //生成一条雨丝
+            rain.init();
+            rainArr.push(rain);
+          },j*300)
+        })(i)
+       
+      }
+    }
+
+    //每隔一段时间， 擦除画布， 渲染新的雨丝数据
+    function move(){
+      
+      ctx.fillStyle = "rgba(0,0,0,0.1)";
+      // ctx.clearRect(0,0, w, h);
+      ctx.fillRect(0, 0, w, h); // 先绘制 ？？？？？？？
+
+      for(var i = 0; i < rainArr.length; i++){
+        rainArr[i].draw();
+      }
+
+      window.requestAnimationFrame(move);
+    }
+   
+   createData();
+   move();
+
+   //工具函数
+   function random(min, max){
+     return Math.floor(Math.random() * (max-min)+min);
+   }
+   function randomColor(t){
+    //  return rgba(Math.random() * 255, Math.random() *25, Math.random() * 255, Math.random())
+    var r = Math.floor(Math.random()*255);
+    var g = Math.floor(Math.random()*255);
+    var b = Math.floor(Math.random()*255);
+    return "rgba("+ r+","+ g +","+ b +","+ t +")"
+   }
+
+
+
+  </script>
+</body>
+</html>
