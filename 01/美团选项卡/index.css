@@ -1,0 +1,128 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+}
+body {
+    background-color: #eee;
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 2002517 */
+    src: url('http://at.alicdn.com/t/font_2002517_fmjckih2chm.eot');
+    src: url('http://at.alicdn.com/t/font_2002517_fmjckih2chm.eot?#iefix') format('embedded-opentype'),
+    url('http://at.alicdn.com/t/font_2002517_fmjckih2chm.woff2') format('woff2'),
+    url('http://at.alicdn.com/t/font_2002517_fmjckih2chm.woff') format('woff'),
+    url('http://at.alicdn.com/t/font_2002517_fmjckih2chm.ttf') format('truetype'),
+    url('http://at.alicdn.com/t/font_2002517_fmjckih2chm.svg#iconfont') format('svg');
+}
+.iconfont {
+    font-family: 'iconfont';
+    font-style: normal;
+    font-size: 12px;
+}
+.container {
+    width: 1190px;
+    margin: 40px auto;
+    border: 1px solid #Eee;
+}
+
+.clearfix::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+.nav {
+    height: 44px;
+    line-height: 44px;
+    background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+    color: #fff;
+    font-size: 14px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.nav .title {
+    font-size: 18px;
+    margin-left: 13px;
+    margin-right: 10px;
+}
+.nav .nav-item {
+    float: left;
+    padding: 0 5px;
+    cursor: pointer;
+    position: relative;
+}
+.nav .total {
+    float: right;
+    margin-right: 12px;
+    color: #fff;
+}
+
+.nav .nav-item.current::after {
+    content: "";
+    position: absolute;
+    border: 5px solid transparent;
+    border-bottom-width: 7px;
+    border-bottom-color: #fff;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.view {
+    padding: 20px 0 20px 20px;
+    background-color: #fff;
+}
+.view .products .item a {
+    display: block;
+}
+.view .products .product-card {
+    position: relative;
+    display: inline-block;
+}
+.view .products .item {
+    float: left;
+    margin-right: 18px;
+    margin-bottom: 20px;
+}
+.view .products .item .product-img {
+    width: 370px;
+    height: 208px;
+    display: block;
+    border-radius: 4px;
+    background: url(https://p0.meituan.net/travelcube/214b8411190e874781fe91dd3096236211567.png);
+    background-size: cover;
+    background-position: 50%;
+    margin-bottom: 11px;
+}
+.view .products .item .head-img {
+    border: 2px solid #FFFFFF;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    bottom: -12px;
+    right: 15px;
+    border-radius: 40px;
+}
+
+.product-info .product-title {
+    font-size: 16px;
+    color: #222222;
+    margin: 7px 0;
+    font-weight: 400;
+    width: 297px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.product-info .sub-title {
+    font-size: 12px;
+    color: #999999;
+    text-align: left;
+}
+.product-info .price-number {
+    font-weight: 500;
+    font-size: 22px;
+    color: #FF6600;
+    padding: 4px 0;
+}

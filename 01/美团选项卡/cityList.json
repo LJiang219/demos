@@ -1,0 +1,46 @@
+{
+    "status": 0,
+    "message": "成功",
+    "cityList": [
+        {
+            "cityId": 220100,
+            "cityName": "长春"
+        },
+        {
+            "cityId": 220200,
+            "cityName": "吉林"
+        },
+        {
+            "cityId": 231000,
+            "cityName": "牡丹江"
+        },
+        {
+            "cityId": 230600,
+            "cityName": "大庆"
+        },
+        {
+            "cityId": 230800,
+            "cityName": "佳木斯"
+        },
+        {
+            "cityId": 230200,
+            "cityName": "齐齐哈尔"
+        },
+        {
+            "cityId": 222400,
+            "cityName": "延边朝鲜族自治州"
+        },
+        {
+            "cityId": 220300,
+            "cityName": "四平"
+        },
+        {
+            "cityId": 210400,
+            "cityName": "抚顺"
+        },
+        {
+            "cityId": 150500,
+            "cityName": "通辽"
+        }
+    ]
+}
